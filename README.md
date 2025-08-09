@@ -33,7 +33,7 @@
 
 **Get Started**
 
-1. Visit the [Your Project Web Application](**[Your Web App Link]**).
+1. Visit the [Your Project Web Application]([Your Web App Link]).
 2. Create an account or log in.
 3. Start coding with AI assistance directly in your browser!
 

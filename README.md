@@ -20,7 +20,7 @@
 </div>
 <br/>
 
-[Your Project Name] is an open-source / SaaS platform that provides [describe core functionality: e.g., AI-powered coding assistance, task automation, intelligent code completion] accessible through a web-based interface. It enables users to [key user benefits, e.g., code smarter, faster, and from anywhere].
+[Your Project Name] is an open-source project that [describe the main purpose of the project]. It helps users to [mention key benefits, e.g., achieve X, simplify Y].
 
 **Key Features**
 

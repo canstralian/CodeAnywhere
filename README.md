@@ -73,4 +73,4 @@ Contributions are welcome! Please read the contributing guidelines and code of c
 
 ---
 
-*This README template is intended to be a customizable starting point for your own web-based AI coding or SaaS platform. Replace all bracketed placeholders with your actual project information and links.*
+*This README template is intended to be a customizable starting point for your project. Replace all bracketed placeholders with your actual project information and links.*

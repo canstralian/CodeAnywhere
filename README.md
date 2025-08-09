@@ -24,12 +24,12 @@
 
 **Key Features**
 
-* **AI-Powered Code Generation:** Generate code snippets and projects from natural language or structured input.
-* **Automated Refactoring:** Improve and optimize your code automatically.
-* **Intelligent Code Completion:** Smart suggestions while coding in the web editor.
-* **Task Automation:** Automate repetitive coding or workflow tasks.
-* **Cloud Accessibility:** Access your coding environment from any device with a browser.
-* **SaaS Architecture:** Designed for scalability and multi-user support.
+* **Feature A:** Brief description of what Feature A does.
+* **Feature B:** Brief description of what Feature B does.
+* **Feature C:** Brief description of what Feature C does.
+* **Cross-Platform:** Accessible on multiple platforms (if applicable).
+* **Scalable:** Designed for scalability and multi-user support.
+* **And more...**
 
 **Get Started**
 

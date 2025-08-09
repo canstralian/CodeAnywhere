@@ -5,7 +5,7 @@
 </p>
 <div align="center">
 
-<a href="[Your Project Website or Marketplace Link]" target="_blank"><img src="https://img.shields.io/badge/Powered%20by%20[Your Project Name]-green?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Powered by [Your Project Name]"></a>
+<a href="[Your Project Website or Marketplace Link]" target="_blank"><img src="https://img.shields.io/badge/Powered%20by%20[Your Project Name]-green?style=for-the-badge&logoColor=white" alt="Powered by [Your Project Name]"></a>
 <a href="[Your Web App Link]" target="_blank"><img src="https://img.shields.io/badge/Access%20Online-blue?style=for-the-badge&logo=web&logoColor=white" alt="Access Online"></a>
 
 <a href="[Your Community Link 1]" target="_blank"><img src="https://img.shields.io/badge/Join%20Community-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Join Community"></a>

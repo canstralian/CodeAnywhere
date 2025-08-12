@@ -1,0 +1,60 @@
+# .github/workflows/cloudflare-worker-build.yml
+name: Cloudflare Worker Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Lint Cloudflare Worker
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        working-directory: webview-ui
+        run: npm ci
+
+      - name: Lint and Test
+        working-directory: webview-ui
+        run: |
+          npm run lint
+          npm test
+
+      - name: Build Cloudflare Worker
+        run: npx wrangler build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: worker-build
+          path: dist/
+
+  deploy:
+    name: Deploy Cloudflare Worker
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: worker-build
+
+      - name: Deploy Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: npx wrangler publish

@@ -5,7 +5,7 @@
 ![Last Commit](https://img.shields.io/github/last-commit/canstralian/CodeAnywhere?style=flat-square)
 ![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square)
 ![Issues](https://img.shields.io/github/issues/canstralian/CodeAnywhere?style=flat-square)
-![Pull Requests](https://img.shields.io/github/issues-pr/canstralian/codeflux-ai-kit?style=flat-square)
+![Pull Requests](https://img.shields.io/github/issues-pr/canstralian/CodeAnywhere?style=flat-square)
 
 > **“Code in flow. Build in balance.”**  
 > CodeFlux AI Kit blends cutting-edge AI tooling with timeless Taoist design principles—balancing clarity with complexity, minimalism with power.

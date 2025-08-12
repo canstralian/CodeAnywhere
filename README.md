@@ -1,8 +1,8 @@
 
 # CodeFlux AI Kit
 
-![License](https://img.shields.io/github/license/yourusername/codeflux-ai-kit?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/codeflux-ai-kit?style=flat-square)
+![License](https://img.shields.io/github/license/canstralian/CodeAnywhere?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/canstralian/CodeAnywhere?style=flat-square)
 ![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square)
 ![Issues](https://img.shields.io/github/issues/canstralian/codeflux-ai-kit?style=flat-square)
 ![Pull Requests](https://img.shields.io/github/issues-pr/canstralian/codeflux-ai-kit?style=flat-square)

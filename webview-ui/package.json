@@ -10,7 +10,7 @@
 		"test": "jest",
 		"dev": "vite",
 		"tsc": "tsc -b",
-		"vite-build": "vite build",
+		"vite-build": "npx vite build",
 		"build": "npm-run-all -p tsc vite-build",
 		"preview": "vite preview",
 		"storybook": "storybook dev -p 6006",

@@ -4,6 +4,16 @@ import { truncateOutput } from "../integrations/misc/extract-text"
 
 const execAsync = promisify(exec)
 const GIT_OUTPUT_LINE_LIMIT = 500
+const SAFE_GIT_REF_REGEX = /^[a-f0-9]{4,64}$/i
+
+function sanitizeGitSearchQuery(query: string): string {
+	// Block shell metacharacters and control chars to avoid command injection via `git log --grep`.
+	if (/[^\p{L}\p{N}\s._:/@#-]/u.test(query)) {
+		return ""
+	}
+
+	return query.trim().slice(0, 120)
+}
 
 export interface GitCommit {
 	hash: string
@@ -33,6 +43,11 @@ async function checkGitInstalled(): Promise<boolean> {
 
 export async function searchCommits(query: string, cwd: string): Promise<GitCommit[]> {
 	try {
+		const sanitizedQuery = sanitizeGitSearchQuery(query)
+		if (!sanitizedQuery) {
+			return []
+		}
+
 		const isInstalled = await checkGitInstalled()
 		if (!isInstalled) {
 			console.error("Git is not installed")
@@ -47,15 +62,16 @@ export async function searchCommits(query: string, cwd: string): Promise<GitComm
 
 		// Search commits by hash or message, limiting to 10 results
 		const { stdout } = await execAsync(
-			`git log -n 10 --format="%H%n%h%n%s%n%an%n%ad" --date=short ` + `--grep="${query}" --regexp-ignore-case`,
+			`git log -n 10 --format="%H%n%h%n%s%n%an%n%ad" --date=short ` +
+				`--grep="${sanitizedQuery}" --regexp-ignore-case`,
 			{ cwd },
 		)
 
 		let output = stdout
-		if (!output.trim() && /^[a-f0-9]+$/i.test(query)) {
+		if (!output.trim() && SAFE_GIT_REF_REGEX.test(sanitizedQuery)) {
 			// If no results from grep search and query looks like a hash, try searching by hash
 			const { stdout: hashStdout } = await execAsync(
-				`git log -n 10 --format="%H%n%h%n%s%n%an%n%ad" --date=short ` + `--author-date-order ${query}`,
+				`git log -n 10 --format="%H%n%h%n%s%n%an%n%ad" --date=short ` + `--author-date-order ${sanitizedQuery}`,
 				{ cwd },
 			).catch(() => ({ stdout: "" }))
 
@@ -91,6 +107,11 @@ export async function searchCommits(query: string, cwd: string): Promise<GitComm
 
 export async function getCommitInfo(hash: string, cwd: string): Promise<string> {
 	try {
+		const normalizedHash = hash.trim()
+		if (!SAFE_GIT_REF_REGEX.test(normalizedHash)) {
+			return "Invalid commit hash"
+		}
+
 		const isInstalled = await checkGitInstalled()
 		if (!isInstalled) {
 			return "Git is not installed"
@@ -102,14 +123,18 @@ export async function getCommitInfo(hash: string, cwd: string): Promise<string> 
 		}
 
 		// Get commit info, stats, and diff separately
-		const { stdout: info } = await execAsync(`git show --format="%H%n%h%n%s%n%an%n%ad%n%b" --no-patch ${hash}`, {
-			cwd,
-		})
-		const [fullHash, shortHash, subject, author, date, body] = info.trim().split("\n")
+		const { stdout: info } = await execAsync(
+			`git show --format="%H%n%h%n%s%n%an%n%ad%n%b" --no-patch ${normalizedHash}`,
+			{
+				cwd,
+			},
+		)
+		const [fullHash, shortHash, subject, author, date, ...bodyParts] = info.trim().split("\n")
+		const body = bodyParts.join("\n")
 
-		const { stdout: stats } = await execAsync(`git show --stat --format="" ${hash}`, { cwd })
+		const { stdout: stats } = await execAsync(`git show --stat --format="" ${normalizedHash}`, { cwd })
 
-		const { stdout: diff } = await execAsync(`git show --format="" ${hash}`, { cwd })
+		const { stdout: diff } = await execAsync(`git show --format="" ${normalizedHash}`, { cwd })
 
 		const summary = [
 			`Commit: ${shortHash} (${fullHash})`,

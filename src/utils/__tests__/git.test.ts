@@ -180,6 +180,12 @@ describe("git utils", () => {
 				date: "2024-01-06",
 			})
 		})
+
+		it("should reject unsafe query inputs", async () => {
+			const result = await searchCommits('test"; rm -rf /', cwd)
+			expect(result).toEqual([])
+			expect(exec).not.toHaveBeenCalled()
+		})
 	})
 
 	describe("getCommitInfo", () => {
@@ -234,6 +240,12 @@ describe("git utils", () => {
 
 			const result = await getCommitInfo("abc123", cwd)
 			expect(result).toBe("Git is not installed")
+		})
+
+		it("should reject invalid commit hash", async () => {
+			const result = await getCommitInfo("abc123;echo pwned", cwd)
+			expect(result).toBe("Invalid commit hash")
+			expect(exec).not.toHaveBeenCalled()
 		})
 
 		it("should return error message when not in a git repository", async () => {

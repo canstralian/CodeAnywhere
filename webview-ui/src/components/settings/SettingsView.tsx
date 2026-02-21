@@ -152,7 +152,7 @@ const SettingsView = forwardRef<SettingsViewRef, SettingsViewProps>(({ onDone, o
 		setChangeDetected(false)
 	}, [currentApiConfigName, extensionState, isChangeDetected])
 
-	// kilocode_change
+	// codeflux_change
 	// Temporary way of making sure that the Settings view updates its local state properly when receiving
 	// api keys from providers that support url callbacks. This whole Settings View needs proper with this local state thing later
 	useEffect(() => {

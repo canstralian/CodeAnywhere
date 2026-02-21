@@ -1,4 +1,4 @@
-# CLAUDE.md — AI Assistant Guide for Kilo Code
+# CLAUDE.md — AI Assistant Guide for CodeFlux AI Kit
 
 This file provides context and conventions for AI assistants (Claude, Copilot, etc.) working in this repository.
 
@@ -6,19 +6,19 @@ This file provides context and conventions for AI assistants (Claude, Copilot, e
 
 ## Project Overview
 
-**Kilo Code** (`kilo-code` v4.8.0) is a VSCode extension that delivers a full AI-powered development assistant — a "whole dev team of AI agents in your editor." It supports 15+ AI providers (Anthropic, OpenAI, Bedrock, Vertex AI, Mistral, Ollama, etc.) and implements the Model Context Protocol (MCP) for extensibility.
+**CodeFlux AI Kit** (`codeflux-ai-kit` v4.8.0) is a VSCode extension that delivers a full AI-powered development assistant — a "whole dev team of AI agents in your editor." It supports 15+ AI providers (Anthropic, OpenAI, Bedrock, Vertex AI, Mistral, Ollama, etc.) and implements the Model Context Protocol (MCP) for extensibility.
 
-- **Publisher**: kilocode
+- **Publisher**: canstralian
 - **VSCode requirement**: ^1.84.0
 - **Node version**: 20.18.1 (enforced via `.nvmrc`)
-- **Upstream repo**: https://github.com/Kilo-Org/kilocode
+- **Repository**: https://github.com/canstralian/Codeflux-ai-kit
 
 ---
 
 ## Repository Structure
 
 ```
-kilocode/
+codeflux-ai-kit/
 ├── src/                        # Extension backend (TypeScript, Node.js)
 │   ├── extension.ts            # Entry point: registers commands, activates providers
 │   ├── core/                   # Core agent logic
@@ -46,7 +46,7 @@ kilocode/
 │   │   ├── api.ts              # Provider/model type definitions
 │   │   └── modes.ts            # Agent operating modes
 │   └── i18n/                   # Internationalization
-│       └── locales/            # Language JSON files
+│       └── locales/            # Language JSON files (15 languages)
 ├── webview-ui/                 # React sidebar UI (Vite + Tailwind CSS)
 │   └── src/
 │       ├── components/         # React components
@@ -57,8 +57,9 @@ kilocode/
 ├── scripts/                    # Build and maintenance scripts
 ├── cline_docs/                 # Developer how-to guides
 │   └── settings.md             # Step-by-step guide for adding new settings
-├── .github/workflows/          # CI/CD (code-qa.yml)
+├── .github/workflows/          # CI/CD (code-qa.yml, cloudflare-worker-build.yml)
 ├── .clinerules                 # Code quality rules for AI assistants
+├── .codefluxmodes              # Project-specific custom agent modes
 ├── package.json                # Root package (workspaces: webview-ui)
 ├── tsconfig.json               # Root TypeScript config (extension)
 ├── esbuild.js                  # Extension bundler config
@@ -235,7 +236,12 @@ Providers are in `src/api/providers/`. All implement the `ApiHandler` interface:
 | OpenAI             | `openai.ts`, `openai-native.ts` |
 | Mistral            | `mistral.ts`                    |
 | Ollama (local)     | `ollama.ts`                     |
-| + 8 more           | See `src/api/providers/`        |
+| Deepseek           | `deepseek.ts`                   |
+| Gemini             | `gemini.ts`                     |
+| OpenRouter         | `openrouter.ts`                 |
+| LM Studio          | `lmstudio.ts`                   |
+| Fireworks          | `fireworks.ts`                  |
+| + others           | See `src/api/providers/`        |
 
 When adding a new provider, register it in `src/api/index.ts` and add its configuration type to `src/shared/api.ts`.
 
@@ -249,7 +255,9 @@ When adding a new provider, register it in `src/api/index.ts` and add its config
 
 ---
 
-## CI/CD (`.github/workflows/code-qa.yml`)
+## CI/CD (`.github/workflows/`)
+
+### code-qa.yml
 
 | Job                  | What it runs                                            |
 | -------------------- | ------------------------------------------------------- |
@@ -258,6 +266,10 @@ When adding a new provider, register it in `src/api/index.ts` and add its config
 | `test-extension`     | Jest unit tests for extension                           |
 | `test-webview`       | Jest unit tests for React UI                            |
 | `integration-test`   | E2E VSCode tests (requires `OPENROUTER_API_KEY` secret) |
+
+### cloudflare-worker-build.yml
+
+Builds and optionally deploys a Cloudflare Worker. Runs on pushes and PRs to main.
 
 All jobs must pass before merging.
 

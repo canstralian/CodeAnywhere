@@ -41,15 +41,15 @@ let extensionContext: vscode.ExtensionContext
 // Your extension is activated the very first time the command is executed.
 export async function activate(context: vscode.ExtensionContext) {
 	extensionContext = context
-	outputChannel = vscode.window.createOutputChannel("Kilo-Code")
+	outputChannel = vscode.window.createOutputChannel("CodeFlux")
 	context.subscriptions.push(outputChannel)
-	outputChannel.appendLine("Kilo Code extension activated")
+	outputChannel.appendLine("CodeFlux AI Kit extension activated")
 
 	// Migrate old settings to new
 	await migrateSettings(context, outputChannel)
 
 	// Initialize i18n for internationalization support
-	initializeI18n(context.globalState.get("language") ?? "en-US") // kilocode_change
+	initializeI18n(context.globalState.get("language") ?? "en-US") // codeflux_change
 
 	// Initialize terminal shell execution handlers.
 	TerminalRegistry.initialize()
@@ -71,14 +71,14 @@ export async function activate(context: vscode.ExtensionContext) {
 	)
 
 	if (!context.globalState.get("firstInstallCompleted")) {
-		outputChannel.appendLine("First installation detected, opening Kilo Code sidebar!")
+		outputChannel.appendLine("First installation detected, opening CodeFlux AI Kit sidebar!")
 		try {
-			await vscode.commands.executeCommand("kilo-code.SidebarProvider.focus")
+			await vscode.commands.executeCommand("codeflux.SidebarProvider.focus")
 
-			outputChannel.appendLine("Opening Kilo Code walkthrough")
+			outputChannel.appendLine("Opening CodeFlux AI Kit walkthrough")
 			await vscode.commands.executeCommand(
 				"workbench.action.openWalkthrough",
-				"kilocode.kilo-code#kiloCodeWalkthrough",
+				"canstralian.codeflux-ai-kit#codefluxWalkthrough",
 				false,
 			)
 
@@ -129,7 +129,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	registerTerminalActions(context)
 
 	// Allows other extensions to activate once Roo is ready.
-	vscode.commands.executeCommand("kilo-code.activationCompleted")
+	vscode.commands.executeCommand("codeflux.activationCompleted")
 
 	// Implements the `RooCodeAPI` interface.
 	return new API(outputChannel, provider)
@@ -137,7 +137,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 // This method is called when your extension is deactivated
 export async function deactivate() {
-	outputChannel.appendLine("Kilo Code extension deactivated")
+	outputChannel.appendLine("CodeFlux AI Kit extension deactivated")
 	// Clean up MCP server manager
 	await McpServerManager.cleanup(extensionContext)
 

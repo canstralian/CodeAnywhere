@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
     - name: Idea/Feature Request
-      url: https://github.com/Kilo-Org/kilocode/discussions/categories/ideas
-      about: Share and vote on feature requests for Kilo Code
+      url: https://github.com/canstralian/Codeflux-ai-kit/discussions/categories/ideas
+      about: Share and vote on feature requests for CodeFlux AI Kit
     - name: Leave a Review
-      url: https://marketplace.visualstudio.com/items?itemName=kilocode.Kilo-Code&ssr=false#review-details
-      about: Enjoying Kilo Code? Leave a review here!
+      url: https://marketplace.visualstudio.com/items?itemName=canstralian.codeflux-ai-kit&ssr=false#review-details
+      about: Enjoying CodeFlux AI Kit? Leave a review here!

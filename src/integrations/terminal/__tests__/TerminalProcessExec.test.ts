@@ -123,7 +123,7 @@ async function testTerminalCommand(
 			executeCommand: jest.fn(),
 			cwd: vscode.Uri.file("/test/path"),
 		},
-		name: "Kilo Code",
+		name: "CodeFlux AI Kit",
 		processId: Promise.resolve(123),
 		creationOptions: {},
 		exitStatus: undefined,

@@ -1,5 +1,5 @@
 {
-	"greeting": "Kilo Code能為您做什麼？",
+	"greeting": "CodeFlux AI Kit能為您做什麼？",
 	"task": {
 		"title": "任務",
 		"seeMore": "查看更多",
@@ -82,7 +82,7 @@
 	"edit": "編輯...",
 	"forNextMode": "用於下一個模式",
 	"error": "錯誤",
-	"troubleMessage": "Kilo Code遇到問題...",
+	"troubleMessage": "CodeFlux AI Kit遇到問題...",
 	"apiRequest": {
 		"title": "API請求",
 		"failed": "API請求失敗",
@@ -107,45 +107,45 @@
 		"current": "當前"
 	},
 	"instructions": {
-		"wantsToFetch": "Kilo Code想要獲取詳細指示以協助目前任務"
+		"wantsToFetch": "CodeFlux AI Kit想要獲取詳細指示以協助目前任務"
 	},
 	"fileOperations": {
-		"wantsToRead": "Kilo Code想讀取此檔案:",
-		"wantsToReadOutsideWorkspace": "Kilo Code想讀取此工作區外的檔案:",
-		"didRead": "Kilo Code已讀取此檔案:",
-		"wantsToEdit": "Kilo Code想編輯此檔案:",
-		"wantsToEditOutsideWorkspace": "Kilo Code想編輯此工作區外的檔案:",
-		"wantsToCreate": "Kilo Code想創建新檔案:"
+		"wantsToRead": "CodeFlux AI Kit想讀取此檔案:",
+		"wantsToReadOutsideWorkspace": "CodeFlux AI Kit想讀取此工作區外的檔案:",
+		"didRead": "CodeFlux AI Kit已讀取此檔案:",
+		"wantsToEdit": "CodeFlux AI Kit想編輯此檔案:",
+		"wantsToEditOutsideWorkspace": "CodeFlux AI Kit想編輯此工作區外的檔案:",
+		"wantsToCreate": "CodeFlux AI Kit想創建新檔案:"
 	},
 	"directoryOperations": {
-		"wantsToViewTopLevel": "Kilo Code想查看此目錄中的頂層檔案:",
-		"didViewTopLevel": "Kilo Code已查看此目錄中的頂層檔案:",
-		"wantsToViewRecursive": "Kilo Code想遞迴查看此目錄中的所有檔案:",
-		"didViewRecursive": "Kilo Code已遞迴查看此目錄中的所有檔案:",
-		"wantsToViewDefinitions": "Kilo Code想查看此目錄中使用的原始碼定義名稱:",
-		"didViewDefinitions": "Kilo Code已查看此目錄中使用的原始碼定義名稱:",
-		"wantsToSearch": "Kilo Code想在此目錄中搜尋 <code>{{regex}}</code>:",
-		"didSearch": "Kilo Code已在此目錄中搜尋 <code>{{regex}}</code>:"
+		"wantsToViewTopLevel": "CodeFlux AI Kit想查看此目錄中的頂層檔案:",
+		"didViewTopLevel": "CodeFlux AI Kit已查看此目錄中的頂層檔案:",
+		"wantsToViewRecursive": "CodeFlux AI Kit想遞迴查看此目錄中的所有檔案:",
+		"didViewRecursive": "CodeFlux AI Kit已遞迴查看此目錄中的所有檔案:",
+		"wantsToViewDefinitions": "CodeFlux AI Kit想查看此目錄中使用的原始碼定義名稱:",
+		"didViewDefinitions": "CodeFlux AI Kit已查看此目錄中使用的原始碼定義名稱:",
+		"wantsToSearch": "CodeFlux AI Kit想在此目錄中搜尋 <code>{{regex}}</code>:",
+		"didSearch": "CodeFlux AI Kit已在此目錄中搜尋 <code>{{regex}}</code>:"
 	},
 	"commandOutput": "命令輸出",
 	"response": "回應",
 	"arguments": "參數",
 	"mcp": {
-		"wantsToUseTool": "Kilo Code想在{{serverName}} MCP伺服器上使用工具:",
-		"wantsToAccessResource": "Kilo Code想存取{{serverName}} MCP伺服器上的資源:"
+		"wantsToUseTool": "CodeFlux AI Kit想在{{serverName}} MCP伺服器上使用工具:",
+		"wantsToAccessResource": "CodeFlux AI Kit想存取{{serverName}} MCP伺服器上的資源:"
 	},
 	"modes": {
-		"wantsToSwitch": "Kilo Code想切換到<code>{{mode}}</code>模式",
-		"wantsToSwitchWithReason": "Kilo Code想切換到<code>{{mode}}</code>模式，原因: {{reason}}",
-		"didSwitch": "Kilo Code已切換到<code>{{mode}}</code>模式",
-		"didSwitchWithReason": "Kilo Code已切換到<code>{{mode}}</code>模式，原因: {{reason}}"
+		"wantsToSwitch": "CodeFlux AI Kit想切換到<code>{{mode}}</code>模式",
+		"wantsToSwitchWithReason": "CodeFlux AI Kit想切換到<code>{{mode}}</code>模式，原因: {{reason}}",
+		"didSwitch": "CodeFlux AI Kit已切換到<code>{{mode}}</code>模式",
+		"didSwitchWithReason": "CodeFlux AI Kit已切換到<code>{{mode}}</code>模式，原因: {{reason}}"
 	},
 	"subtasks": {
-		"wantsToCreate": "Kilo Code想在<code>{{mode}}</code>模式下創建新子任務:",
-		"wantsToFinish": "Kilo Code想完成此子任務"
+		"wantsToCreate": "CodeFlux AI Kit想在<code>{{mode}}</code>模式下創建新子任務:",
+		"wantsToFinish": "CodeFlux AI Kit想完成此子任務"
 	},
 	"questions": {
-		"hasQuestion": "Kilo Code有一個問題:"
+		"hasQuestion": "CodeFlux AI Kit有一個問題:"
 	},
 	"taskCompleted": "任務完成",
 	"shellIntegration": {
@@ -158,7 +158,7 @@
 	"autoApprove": {
 		"title": "自動批准:",
 		"none": "無",
-		"description": "自動批准允許Kilo Code無需請求許可即可執行操作。僅為您完全信任的操作啟用。更詳細的配置可在<settingsLink>設定</settingsLink>中查看。",
+		"description": "自動批准允許CodeFlux AI Kit無需請求許可即可執行操作。僅為您完全信任的操作啟用。更詳細的配置可在<settingsLink>設定</settingsLink>中查看。",
 		"actions": {
 			"readFiles": {
 				"label": "讀取檔案和目錄",
@@ -222,7 +222,7 @@
 		"detailsDiscussLinks": "在<discordLink>Discord</discordLink>和<redditLink>Reddit</redditLink>取得更多詳情並參與討論 🚀"
 	},
 	"browser": {
-		"rooWantsToUse": "Kilo Code想使用瀏覽器:",
+		"rooWantsToUse": "CodeFlux AI Kit想使用瀏覽器:",
 		"consoleLogs": "主控台記錄",
 		"noNewLogs": "(沒有新記錄)",
 		"screenshot": "瀏覽器截圖",

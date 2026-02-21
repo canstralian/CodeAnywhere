@@ -11,7 +11,7 @@ import { Equals, Keys, AssertEqual } from "../utils/type-fu"
  */
 
 export const providerNames = [
-	// kilocode_change
+	// codeflux_change
 	"kilocode",
 	"fireworks",
 	"anthropic",
@@ -393,7 +393,7 @@ export const providerSettingsSchema = z.object({
 	includeMaxTokens: z.boolean().optional(),
 	// Fake AI
 	fakeAi: z.unknown().optional(),
-	// kilocode_change
+	// codeflux_change
 	kilocodeToken: z.string().optional(),
 	fireworksModelId: z.string().optional(),
 	fireworksApiKey: z.string().optional(),
@@ -481,7 +481,7 @@ const providerSettingsRecord: ProviderSettingsRecord = {
 	includeMaxTokens: undefined,
 	// Fake AI
 	fakeAi: undefined,
-	// kilocode_change
+	// codeflux_change
 	kilocodeToken: undefined,
 	fireworksModelId: undefined,
 	fireworksApiKey: undefined,

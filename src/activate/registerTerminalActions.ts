@@ -4,11 +4,11 @@ import { Terminal } from "../integrations/terminal/Terminal"
 import { t } from "../i18n"
 
 const TERMINAL_COMMAND_IDS = {
-	ADD_TO_CONTEXT: "kilo-code.terminalAddToContext",
-	FIX: "kilo-code.terminalFixCommand",
-	FIX_IN_CURRENT_TASK: "kilo-code.terminalFixCommandInCurrentTask",
-	EXPLAIN: "kilo-code.terminalExplainCommand",
-	EXPLAIN_IN_CURRENT_TASK: "kilo-code.terminalExplainCommandInCurrentTask",
+	ADD_TO_CONTEXT: "codeflux.terminalAddToContext",
+	FIX: "codeflux.terminalFixCommand",
+	FIX_IN_CURRENT_TASK: "codeflux.terminalFixCommandInCurrentTask",
+	EXPLAIN: "codeflux.terminalExplainCommand",
+	EXPLAIN_IN_CURRENT_TASK: "codeflux.terminalExplainCommandInCurrentTask",
 } as const
 
 export const registerTerminalActions = (context: vscode.ExtensionContext) => {
@@ -18,14 +18,14 @@ export const registerTerminalActions = (context: vscode.ExtensionContext) => {
 		context,
 		TERMINAL_COMMAND_IDS.FIX,
 		"TERMINAL_FIX",
-		"What would you like Kilo Code to fix?",
+		"What would you like CodeFlux AI Kit to fix?",
 	)
 
 	registerTerminalActionPair(
 		context,
 		TERMINAL_COMMAND_IDS.EXPLAIN,
 		"TERMINAL_EXPLAIN",
-		"What would you like Kilo Code to explain?",
+		"What would you like CodeFlux AI Kit to explain?",
 	)
 }
 

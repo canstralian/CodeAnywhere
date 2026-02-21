@@ -19,8 +19,8 @@ import { XmlMatcher } from "../../utils/xml-matcher"
 const DEEP_SEEK_DEFAULT_TEMPERATURE = 0.6
 
 export const defaultHeaders = {
-	"HTTP-Referer": "https://github.com/Kilo-Org/kilocode",
-	"X-Title": "Kilo Code",
+	"HTTP-Referer": "https://github.com/canstralian/Codeflux-ai-kit",
+	"X-Title": "CodeFlux AI Kit",
 }
 
 export interface OpenAiHandlerOptions extends ApiHandlerOptions {}

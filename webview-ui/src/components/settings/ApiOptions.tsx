@@ -335,12 +335,12 @@ const ApiOptions = ({
 										},
 									})
 								}}>
-								Log out from Kilo Code
+								Log out from CodeFlux AI Kit
 							</Button>
 						</div>
 					) : (
 						<VSCodeButtonLink variant="secondary" href={getKiloCodeBackendAuthUrl(uriScheme)}>
-							Log in at Kilo Code
+							Log in at CodeFlux AI Kit
 						</VSCodeButtonLink>
 					)}
 				</>

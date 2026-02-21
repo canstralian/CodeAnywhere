@@ -38,8 +38,8 @@ describe("OpenRouterHandler", () => {
 			baseURL: "https://openrouter.ai/api/v1",
 			apiKey: mockOptions.openRouterApiKey,
 			defaultHeaders: {
-				"HTTP-Referer": "https://github.com/Kilo-Org/kilocode",
-				"X-Title": "Kilo Code",
+				"HTTP-Referer": "https://github.com/canstralian/Codeflux-ai-kit",
+				"X-Title": "CodeFlux AI Kit",
 			},
 		})
 	})

@@ -1,93 +1,109 @@
-
 # CodeFlux AI Kit
 
-![License](https://img.shields.io/github/license/canstralian/CodeAnywhere?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/canstralian/CodeAnywhere?style=flat-square)
-![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square)
-![Issues](https://img.shields.io/github/issues/canstralian/CodeAnywhere?style=flat-square)
-![Pull Requests](https://img.shields.io/github/issues-pr/canstralian/CodeAnywhere?style=flat-square)
+[![License](https://img.shields.io/github/license/canstralian/Codeflux-ai-kit?style=flat-square)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/canstralian/Codeflux-ai-kit?style=flat-square)](https://github.com/canstralian/Codeflux-ai-kit/commits)
+[![Issues](https://img.shields.io/github/issues/canstralian/Codeflux-ai-kit?style=flat-square)](https://github.com/canstralian/Codeflux-ai-kit/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/canstralian/Codeflux-ai-kit?style=flat-square)](https://github.com/canstralian/Codeflux-ai-kit/pulls)
 
-> **“Code in flow. Build in balance.”**  
-> CodeFlux AI Kit blends cutting-edge AI tooling with timeless Taoist design principles—balancing clarity with complexity, minimalism with power.
+> **A whole dev team of AI agents in your editor.**
 
----
-
-## 🌊 Vision
-
-The CodeFlux AI Kit is more than a codebase—it’s a living stream.  
-Its architecture flows like water: adapting, shaping itself to your project’s needs, and avoiding unnecessary resistance.
-
-We draw from five Taoist precepts:
-
-1. **Wu Wei** – Functions that work without unnecessary force, with natural defaults and graceful fallbacks.
-2. **Ziran** – APIs that “just feel right” without rigid constraint.
-3. **Yin–Yang** – Balanced design between speed and safety, sync and async.
-4. **Empty Space** – Lean code with hooks for future growth and surprise integrations.
-5. **Flow as Narrative** – A project that tells a coherent story from first commit to deployment.
+CodeFlux AI Kit is a VSCode extension that brings a full AI-powered development assistant directly into your editor. It supports 15+ AI providers and implements the Model Context Protocol (MCP) for extensibility.
 
 ---
 
-## 🛠 Features
+## Features
 
-- **AI-Powered Utilities** – Modular, composable functions ready for natural integration.
-- **Minimal Core, Infinite Extensibility** – Hooks and extension points for smooth evolution.
-- **Narrative-Driven Architecture** – Readable, maintainable, and meaningful.
-- **Balanced Performance** – Speed without sacrificing stability.
-
----
-
-## 📂 Project Structure
-
-codeflux-ai-kit/
-├── src/
-│    ├── core/          # The “river source” – essential modules
-│    ├── flows/         # Async & sync pipelines in harmony
-│    ├── extensions/    # Optional tools & integrations
-│    └── utils/         # Small helpers, naturally reusable
-├── tests/
-├── assets/icons/
-│    └── codeflux-logo.svg
-├── README.md
-└── LICENSE
+- **Multi-Provider AI Support** — Anthropic (Claude), OpenAI, AWS Bedrock, Google Vertex AI, Mistral, Ollama, Deepseek, Gemini, OpenRouter, LM Studio, Fireworks, and more
+- **Multiple Agent Modes** — Code, Architect, Ask, and Debug modes with customizable prompts
+- **MCP Integration** — Extensible tool system via the Model Context Protocol
+- **Browser Automation** — Built-in Puppeteer-powered browser actions
+- **Code Intelligence** — Tree-sitter powered code parsing across 15+ languages
+- **Checkpoint System** — Save and restore task state at any point
+- **15 Languages** — Full internationalization support
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
+
+### Prerequisites
+
+- [VS Code](https://code.visualstudio.com/) ^1.84.0
+- [Node.js](https://nodejs.org/) 20.18.1 (see `.nvmrc`)
+
+### Install & Build
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/codeflux-ai-kit.git
-cd codeflux-ai-kit
+git clone https://github.com/canstralian/Codeflux-ai-kit.git
+cd Codeflux-ai-kit
 
-# Install dependencies
-pip install -r requirements.txt
+# Install all dependencies (root + webview-ui workspace)
+npm run install:all
 
-# Run sample flow
-python -m src.flows.demo
+# Build the extension
+npm run compile
 
+# Or build a distributable .vsix
+npm run vsix
+```
 
-⸻
+### Development
 
-🧭 Guiding Philosophy
+```bash
+# Start webview in watch mode (hot reload for React UI)
+npm run dev
 
-“The soft overcomes the hard. The slow overcomes the fast.” – Laozi
-
-Our code is written to be read, extended, and lived with.
-It is not just functional—it’s mindful.
-
-⸻
-
-🤝 Contributing
-
-Contributions are welcome—especially those that improve balance, flow, and natural clarity.
-
-⸻
-
-📜 License
-
-MIT License – see LICENSE for details.
+# Watch extension + webview simultaneously
+npm run watch
+```
 
 ---
 
+## Architecture
 
+```
+VSCode API  <->  Extension Host (Node.js)  <->  Webview (React)
+                      |
+              AI Provider APIs (HTTP)
+                      |
+              MCP Servers (subprocess)
+```
 
+| Directory       | Purpose                                   |
+| --------------- | ----------------------------------------- |
+| `src/`          | Extension backend (TypeScript, Node.js)   |
+| `src/core/`     | Agent logic, tool dispatch, prompt system |
+| `src/api/`      | AI provider abstraction layer             |
+| `src/services/` | MCP, browser, checkpoints, tree-sitter    |
+| `webview-ui/`   | React sidebar UI (Vite + Tailwind CSS)    |
+| `e2e/`          | End-to-end VSCode integration tests       |
+
+---
+
+## Testing
+
+```bash
+npm run test                  # All unit tests
+npm run test:extension        # Extension tests only
+npm run test:webview          # Webview tests only
+npm run check-types           # TypeScript type check
+npm run lint                  # ESLint
+```
+
+---
+
+## Contributing
+
+Contributions are welcome. Please ensure:
+
+- All code changes include test coverage
+- All tests pass (`npm run test`)
+- Type checking passes (`npm run check-types`)
+- Linting passes (`npm run lint`)
+- Follow the existing code conventions (tabs, no semicolons, 120-char lines)
+
+---
+
+## License
+
+Apache License 2.0 — see [LICENSE](LICENSE) for details.

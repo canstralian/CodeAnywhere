@@ -25,7 +25,7 @@ demo.gif
 .gitattributes
 .prettierignore
 .clinerules*
-.kilocodemodes
+.codefluxmodes
 cline_docs/**
 coverage/**
 locales/**

@@ -15,7 +15,7 @@ body:
           label: Which API Provider are you using?
           multiple: false
           options:
-              - Kilo Code
+              - CodeFlux AI Kit
               - OpenRouter
               - Anthropic
               - Fireworks

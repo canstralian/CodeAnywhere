@@ -70,8 +70,8 @@ export class OpenAiHandler extends BaseProvider implements SingleCompletionHandl
 			const modelHostname = new URL(modelUrl).hostname
 			ark = modelHostname === "volces.com" || modelHostname.endsWith(".volces.com")
 		} catch {
-			// If the base URL is invalid, treat it as non-Ark.
-			ark = false
+			// If the base URL is invalid, ark remains false from its
+			// initialization, so no assignment is needed.
 		}
 		if (modelId.startsWith("o3-mini")) {
 			yield* this.handleO3FamilyMessage(modelId, systemPrompt, messages)

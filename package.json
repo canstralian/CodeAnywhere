@@ -421,7 +421,7 @@
 		"js-tiktoken": "^1.0.19",
 		"mammoth": "^1.11.0",
 		"monaco-vscode-textmate-theme-converter": "^0.1.7",
-		"openai": "^4.78.1",
+		"openai": "^6.25.0",
 		"os-name": "^6.0.0",
 		"p-wait-for": "^5.0.2",
 		"pdf-parse": "^1.1.1",

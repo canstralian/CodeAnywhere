@@ -39,7 +39,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       - name: Install dependencies
         run: npm run install:all
@@ -69,13 +69,31 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       - name: Install dependencies
         run: npm run install:all
       - name: Run unit tests
         working-directory: webview-ui
         run: npx jest --silent
+
+  security-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm run install:all
+      - name: Run dependency vulnerability audit
+        run: npm audit --audit-level=high
+      - name: Run webview dependency audit
+        working-directory: webview-ui
+        run: npm audit --audit-level=high
 
   unit-test:
     needs: [test-extension, test-webview]

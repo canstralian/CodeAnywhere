@@ -259,9 +259,9 @@ const HistoryView = ({ onDone }: HistoryViewProps) => {
 											wordBreak: "break-word",
 											overflowWrap: "anywhere",
 										}}
-										data-testid="task-content"
-										dangerouslySetInnerHTML={{ __html: item.task }}
-									/>
+										data-testid="task-content">
+										{item.task}
+									</div>
 									<div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
 										<div
 											data-testid="tokens-container"

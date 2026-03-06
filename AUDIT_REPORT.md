@@ -14,6 +14,25 @@ The codebase is well-structured with strong TypeScript discipline, good separati
 
 ## Findings & Remediations
 
+### 0. CRITICAL — `dangerouslySetInnerHTML` on Plain User Text in `HistoryView.tsx`
+
+**File**: `webview-ui/src/components/history/HistoryView.tsx:263`
+**Severity**: High
+**Status**: **Fixed**
+
+`item.task` is a `z.string()` Zod-validated plain text field (user's task description). It was rendered with `dangerouslySetInnerHTML`, allowing any HTML/JS stored in task history to execute in the webview. Because task text originates from user input, this is a concrete stored-XSS vector.
+
+The fix removes the HTML rendering entirely — the surrounding CSS styles (pre-wrap, webkit-line-clamp) apply identically to a plain text child node:
+
+```diff
+- dangerouslySetInnerHTML={{ __html: item.task }}
++ >
++   {item.task}
++ </div>
+```
+
+---
+
 ### 1. CRITICAL — Mermaid XSS via `securityLevel: "loose"`
 
 **File**: `webview-ui/src/components/common/MermaidBlock.tsx:39`
@@ -95,6 +114,58 @@ The `getLfsPatterns()` function swallowed `.gitattributes` read errors silently:
 
 ---
 
+## Additional Findings from Deep Audit
+
+### 6. MEDIUM — CSP `unsafe-eval` in Webview
+
+**File**: `src/core/webview/ClineProvider.ts:625`
+**Severity**: Medium
+**Status**: Open
+
+The Content Security Policy for the webview includes `'unsafe-eval'` in `script-src`. This allows dynamic code evaluation (`eval()`, `new Function()`, etc.), which dramatically weakens XSS defenses. If an XSS injection is achieved through another vector, `unsafe-eval` allows escalation to arbitrary code execution.
+
+```
+script-src 'unsafe-eval' ${webview.cspSource} https://* ...
+```
+
+**Recommendation**: Audit whether any loaded library actually requires `unsafe-eval` (often required by dev-mode React or some bundlers). In production, attempt to remove it. If required, document and file an issue to track removal.
+
+### 7. CRITICAL — 16 of 18 Core Agent Tools Lack Unit Tests
+
+**Files**: `src/core/tools/` — all except `executeCommandTool.ts`
+**Severity**: High
+**Status**: Open
+
+The agent's core tools (file read/write, diff apply, search-replace, browser control, MCP invocation) have no unit tests. The only tested tool is `executeCommandTool.test.ts` with 14 cases covering HTML entity unescaping.
+
+Highest-priority tools to test:
+- `writeToFileTool.ts` — creates/overwrites files on disk
+- `applyDiffTool.ts` — applies unified diffs; bugs here corrupt source code
+- `searchAndReplaceTool.ts` — regex-based file modification
+- `executeCommandTool.ts` — partial coverage only
+
+### 8. MEDIUM — `Cline.ts` Exceeds 2,600 Lines
+
+**File**: `src/core/Cline.ts` (~2,607 lines)
+**Severity**: Medium
+**Status**: Open
+
+The central AI agent orchestrator handles streaming, tool dispatch, conversation history, checkpoint management, and state coordination in a single file. This makes it difficult to test in isolation and to review for correctness.
+
+**Recommendation**: Extract into focused modules — `ClineStreaming.ts`, `ClineToolDispatch.ts`, `ClineCheckpoints.ts` — with `Cline.ts` as a thin coordinator.
+
+### 9. LOW — `@ts-ignore` in OpenAI Provider
+
+**File**: `src/api/providers/openai.ts:100,124`
+**Severity**: Low
+**Status**: Open
+
+Two `@ts-ignore-next-line` directives suppress type errors for `cache_control: { type: "ephemeral" }` in prompt caching headers. This is pragmatic given SDK type limitations, but the bypasses are undocumented.
+
+**Recommendation**: Add comments explaining why the suppression is necessary and link to the upstream SDK issue.
+
+---
+
 ## Remaining Findings (Not Auto-Fixed)
 
 ### 6. MEDIUM — JSON.parse Without try-catch (15+ Occurrences)
@@ -148,13 +219,18 @@ The following areas are well-implemented:
 
 | # | Issue | File | Severity | Status |
 |---|-------|------|----------|--------|
+| 0 | `dangerouslySetInnerHTML` on plain user text | `HistoryView.tsx:263` | High | **Fixed** |
 | 1 | Mermaid `securityLevel: "loose"` allows XSS | `MermaidBlock.tsx:39` | High | **Fixed** |
 | 2 | `innerHTML` assignment in CopyButton | `CopyButton.tsx:19` | Medium | **Fixed** |
 | 3 | Node.js version mismatch in CI | `code-qa.yml` | Medium | **Fixed** |
 | 4 | No `npm audit` in CI pipeline | `code-qa.yml` | Medium | **Fixed** |
 | 5 | Silent empty catch block | `excludes.ts:196` | Low | **Fixed** |
-| 6 | `JSON.parse` without try-catch (15+ cases) | Multiple | Medium | Open |
-| 7 | `dangerouslySetInnerHTML` fallback unescaped | `CodeBlock.tsx:48` | Medium | Open |
-| 8 | Stale browser connection cache | `BrowserSession.ts` | Low | Open |
-| 9 | Tree-sitter parse cache missing | `tree-sitter/index.ts:64` | Low | Open |
-| 10 | Benchmark not in CI | `code-qa.yml` | Low | Open |
+| 6 | CSP `unsafe-eval` in webview | `ClineProvider.ts:625` | Medium | Open |
+| 7 | 16 of 18 core tools lack unit tests | `src/core/tools/` | High | Open |
+| 8 | `Cline.ts` at 2,607 lines | `src/core/Cline.ts` | Medium | Open |
+| 9 | `@ts-ignore` without explanation | `openai.ts:100,124` | Low | Open |
+| 10 | `JSON.parse` without try-catch (15+ cases) | Multiple chat components | Medium | Open |
+| 11 | `dangerouslySetInnerHTML` fallback unescaped | `CodeBlock.tsx:48` | Medium | Open |
+| 12 | Stale browser connection cache | `BrowserSession.ts` | Low | Open |
+| 13 | Tree-sitter parse cache missing | `tree-sitter/index.ts:64` | Low | Open |
+| 14 | Benchmark not in CI | `code-qa.yml` | Low | Open |
